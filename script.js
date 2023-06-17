@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let acceptInput = true;
     const letterDisplay = document.getElementById('letter-display');
     const faceDisplay = document.getElementById('face-display');
+    const mainDisplay = document.querySelector('main'); // New line
     const rainbowColors = ["orange", "yellow", "green", "blue", "purple", "red", "orange", "yellow", "green", "blue", "purple"];
     let colorIndex = 0;
     let colorInterval = null;
@@ -13,6 +14,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         letterDisplay.textContent = currentLetter;
         faceDisplay.textContent = '';
         document.body.style.backgroundColor = 'white';
+        mainDisplay.classList.remove('shake'); // New line
+        mainDisplay.classList.remove('success'); // New line
         acceptInput = true;
     };
 
@@ -37,6 +40,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (event.key.toLowerCase() === currentLetter.toLowerCase()) {
             lastAttemptCorrect = true;
             faceDisplay.textContent = '😊';
+            mainDisplay.classList.add('success'); // New line
             flashRainbow();
             setTimeout(() => {
                 stopRainbow();
@@ -45,6 +49,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } else {
             lastAttemptCorrect = false;
             faceDisplay.textContent = '☹️';
+            mainDisplay.classList.add('shake'); // New line
             document.body.style.backgroundColor = 'red';
             acceptInput = false;
             setTimeout(generateLetter, 2000);
